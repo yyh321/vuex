@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>hello,Vuex</h1>
+    <p>name: {{ name }}</p>
+    <p>num: {{ $store.state.num }}</p>
+    <p>title: {{ title }}</p>
+    <p>c.age: {{ $store.state.b.c.age }}</p>
+    <p>d.age: {{ $store.state.b.c.d.age }}</p>
+    <p>e.age: {{ $store.state.b.c.d.e.age }}</p>
+    <!-- <p>m.n.age: {{ $store.state.m.age }}</p> -->
+    <button @click="addNum(5)">加5</button>
+    <button @click="minusNum(5)">减5</button>
+    <button @click="changeName('王雪')">changeName</button>
+    <p>
+      <!-- {{ $store.state.a.age }} {{ $store.state.b.age }}
+      {{ $store.state.b.c.age }} -->
+    </p>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState, mapGetters, mapMutations, mapActions } from "./vuex"
+// import {mapMutations} from 'vuex'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  components: {},
+  computed: {
+    ...mapState(["name"]),
+    ...mapGetters(["title"])
+  },
+  methods: {
+    ...mapMutations(["addNum", "minusNum"]),
+    ...mapActions(["changeName"])
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
